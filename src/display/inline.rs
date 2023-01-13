@@ -94,11 +94,14 @@ pub fn print(
         );
 
         for (lhs_line, _) in before_lines {
+            let mut before_lines_str: String = "0#".to_owned();
             if let Some(lhs_line) = lhs_line {
+                before_lines_str.push_str(&format_line_num(lhs_line));
+                before_lines_str.push_str(&("#".to_owned()));
                 print!(
                     "{}   {}",
                     apply_line_number_color(
-                        &format_line_num(lhs_line),
+                        &before_lines_str,
                         false,
                         Side::Left,
                         display_options,
@@ -109,11 +112,14 @@ pub fn print(
         }
 
         for (lhs_line, _) in &hunk_lines {
+            let mut hunk_lines_str: String = "-#".to_owned();
             if let Some(lhs_line) = lhs_line {
+                hunk_lines_str.push_str(&format_line_num(*lhs_line));
+                hunk_lines_str.push_str(&("#".to_owned()));
                 print!(
                     "{}   {}",
                     apply_line_number_color(
-                        &format_line_num(*lhs_line),
+                        &hunk_lines_str,
                         true,
                         Side::Left,
                         display_options,
@@ -123,11 +129,14 @@ pub fn print(
             }
         }
         for (_, rhs_line) in &hunk_lines {
+            let mut hunk_lines_str: String = "+#".to_owned();
             if let Some(rhs_line) = rhs_line {
+                hunk_lines_str.push_str(&format_line_num(*rhs_line));
+                hunk_lines_str.push_str(&("#".to_owned()));
                 print!(
                     "   {}{}",
                     apply_line_number_color(
-                        &format_line_num(*rhs_line),
+                        &hunk_lines_str,
                         true,
                         Side::Right,
                         display_options,
@@ -138,11 +147,14 @@ pub fn print(
         }
 
         for (_, rhs_line) in &after_lines {
+            let mut after_lines_str: String = "0#".to_owned();
             if let Some(rhs_line) = rhs_line {
+                after_lines_str.push_str(&format_line_num(*rhs_line));
+                after_lines_str.push_str(&("#".to_owned()));
                 print!(
                     "   {}{}",
                     apply_line_number_color(
-                        &format_line_num(*rhs_line),
+                        &after_lines_str,
                         false,
                         Side::Right,
                         display_options,
